@@ -14,7 +14,6 @@ namespace API.Controllers
     public class contentController : BaseApiController
     {
         private readonly DataContext _context;
-        private readonly ITokenService _tokenService;
         public contentController(DataContext context, ITokenService tokenService)
         {
             _context = context;
@@ -36,40 +35,40 @@ namespace API.Controllers
         }
 
         [HttpPost("child")]
-        public async Task<ActionResult<SymptomsDto>> Child(SymptomsDto symptomsDto)
+        public async Task<ActionResult<ChildDto>> Child(ChildDto childDto)
         {
-            var symptom = new Symptoms
+            var child = new Child
     {
-        Description=symptomsDto.Description,
-        Age =symptomsDto.Age,
-        Gender = symptomsDto.Gender,
+        age=childDto.age,
+        name =childDto.name,
+        gender=childDto.gender,
+        parent = childDto.parent
     };
-            _context.symptoms.Add(symptom);
+            _context.child.Add(child);
             await _context.SaveChangesAsync();
 
-            return symptomsDto;
+            return childDto;
         }
         
         [HttpPost("school")]
-        public async Task<ActionResult<SchoolDto>> School(SchoolDto SchoolDto)
+        public async Task<ActionResult<SchoolDto>> School(SchoolDto schoolDto)
         {
             var school = new School
-    {
-
-       Name =SchoolDto.Name,
-        PostalCode=SchoolDto.PostalCode,
-        Street  =SchoolDto.Name,
-        Surbub  =SchoolDto.Name,
-         Phone   =SchoolDto.Name,
-        Email  =SchoolDto.Name,
-        Province   =SchoolDto.Name,
-        City   =SchoolDto.Name,
-       link   =SchoolDto.Name
-    };
+            {
+                Name = schoolDto.Name,
+                PostalCode = schoolDto.PostalCode,
+                Street = schoolDto.Street,
+                Surbub = schoolDto.Surbub,
+                Phone = schoolDto.Phone,
+                Email = schoolDto.Email,
+                Province = schoolDto.Province,
+                City = schoolDto.City,
+                link = schoolDto.link
+            };
             _context.schools.Add(school);
             await _context.SaveChangesAsync();
 
-            return SchoolDto;
+            return schoolDto;
         }
 
         private async Task<bool> UserExists(string username)

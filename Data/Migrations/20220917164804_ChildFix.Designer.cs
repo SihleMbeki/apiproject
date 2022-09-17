@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220917164804_ChildFix")]
+    partial class ChildFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
@@ -52,16 +54,15 @@ namespace API.Data.Migrations
                     b.Property<int>("age")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("gender")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("parent")
+                    b.Property<int?>("parentId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("parentId");
 
                     b.ToTable("child");
                 });
@@ -122,6 +123,15 @@ namespace API.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("symptoms");
+                });
+
+            modelBuilder.Entity("API.Entities.Child", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "parent")
+                        .WithMany()
+                        .HasForeignKey("parentId");
+
+                    b.Navigation("parent");
                 });
 #pragma warning restore 612, 618
         }

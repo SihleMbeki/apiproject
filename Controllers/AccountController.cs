@@ -6,6 +6,7 @@ using API.Data;
 using API.DTO;
 using API.Entities;
 using API.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,7 +23,7 @@ namespace API.Controllers
             _tokenService = tokenService;
             _context = context;
         }
-
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
@@ -46,7 +47,7 @@ namespace API.Controllers
                 role = "public"
             };
         }
-
+        [AllowAnonymous]
         [HttpPost("admin/21/register")]
         public async Task<ActionResult<UserDto>> AdminRegister(RegisterDto registerDto)
         {
@@ -70,7 +71,7 @@ namespace API.Controllers
                 role = user.role
             };
         }
-
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto  loginDto)
         {

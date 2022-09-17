@@ -7,8 +7,6 @@ namespace API.DTO
 {
     public class SchoolDto
     {
-
-
         public string Name { get; set; }
         public int PostalCode  { get; set; }
         public string Street  { get; set; }
