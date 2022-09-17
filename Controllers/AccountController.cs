@@ -67,7 +67,7 @@ namespace API.Controllers
             {
                 username = user.userName,
                 Token = _tokenService.CreateToken(user),
-                role = "public"
+                role = user.role
             };
         }
 
