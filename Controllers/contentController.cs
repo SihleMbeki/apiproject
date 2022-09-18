@@ -6,6 +6,8 @@ using API.Data;
 using API.DTO;
 using API.Entities;
 using API.Interfaces;
+using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,11 +16,13 @@ namespace API.Controllers
     public class contentController : BaseApiController
     {
         private readonly DataContext _context;
-        public contentController(DataContext context, ITokenService tokenService)
+        private readonly IUserRepository _userRepository;
+        public contentController(DataContext context, ITokenService tokenService, IUserRepository userRepository)
         {
             _context = context;
+            _userRepository=userRepository;
         }
-
+        [Authorize]
         [HttpPost("symptoms")]
         public async Task<ActionResult<SymptomsDto>> Register(SymptomsDto symptomsDto)
         {
@@ -33,23 +37,29 @@ namespace API.Controllers
 
             return symptomsDto;
         }
-
-        [HttpPost("child")]
-        public async Task<ActionResult<ChildDto>> Child(ChildDto childDto)
+        [Authorize]
+        [HttpPost("child/{username}")]
+        public async Task<ActionResult<ChildDto>> Child(ChildDto childDto,string username)
         {
+            var user=_userRepository.GetUserByUsernameAsync(username);
+            if(user==null){
+               return NotFound();
+            }
             var child = new Child
-    {
-        age=childDto.age,
-        name =childDto.name,
-        gender=childDto.gender,
-        parent = childDto.parent
-    };
+            {
+                age = childDto.age,
+                name = childDto.name,
+                gender = childDto.gender,
+                parent = user.Id
+
+            };
             _context.child.Add(child);
             await _context.SaveChangesAsync();
+            childDto.parent=child.parent;
 
             return childDto;
         }
-        
+        [Authorize]
         [HttpPost("school")]
         public async Task<ActionResult<SchoolDto>> School(SchoolDto schoolDto)
         {
@@ -69,6 +79,30 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
 
             return schoolDto;
+        }
+
+        //get School
+        [Authorize]
+         [HttpGet("school")]
+        public async Task<IEnumerable<API.Entities.School>> FindSchool(SchoolDto schoolDto)
+        {
+        if(await _userRepository.GetSchoolsAsync(schoolDto.Province, schoolDto.City)==null){
+        return null;
+        }else{
+            return await _userRepository.GetSchoolsAsync(schoolDto.Province, schoolDto.City);
+        }
+        }
+
+        //get symptoms
+        [Authorize]
+        [HttpGet("Symptoms/{id}")]
+        public async Task<IEnumerable<API.Entities.Symptoms>> FindSymptoms(int id)
+        {
+        if(await _userRepository.GetSymptoms(id)==null){
+        return null;
+        }else{
+            return await _userRepository.GetSymptoms(id);
+        }
         }
 
         private async Task<bool> UserExists(string username)
