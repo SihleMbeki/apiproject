@@ -57,6 +57,15 @@ namespace API.Services
           return await _context.users.Where(x => x.userName == username).SingleOrDefaultAsync();
         }
 
+        public async Task<School> GetSchoolByIDAsync(int Id)
+        {
+          return await _context.schools.FindAsync(Id);
+        }
+        public async Task<Symptoms> GetSymptomByIDAsync(int Id)
+        {
+          return await _context.symptoms.FindAsync(Id);
+        }
+
         public Task<IEnumerable<AppUser>> GetUsersAsync()
         {
             throw new NotImplementedException();
@@ -71,5 +80,7 @@ namespace API.Services
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

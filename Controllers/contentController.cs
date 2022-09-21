@@ -105,6 +105,19 @@ namespace API.Controllers
         }
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteSchool(int id)
+        {
+            var message = await _userRepository.GetSchoolByIDAsync(id);
+        return Ok();
+        }
+
+         [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteSymptom(int id)
+        {
+            var message = await _userRepository.GetSymptomByIDAsync(id);
+        return Ok();
+        }
         private async Task<bool> UserExists(string username)
         {
             return await _context.users.AnyAsync(x => x.userName == username.ToLower());

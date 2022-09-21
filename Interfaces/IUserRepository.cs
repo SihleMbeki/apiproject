@@ -15,5 +15,7 @@ namespace API.Interfaces
         Task<IEnumerable<School>> GetSchoolsAsync(String province,String city);
         Task<IEnumerable<Symptoms>> GetSymptoms(int  childId);
         Task<ChildDto> GetChildrens(string username);
+        Task<School> GetSchoolByIDAsync(int Id);
+        Task<School> GetSymptomByIDAsync(int Id);
     }
 }
