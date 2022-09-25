@@ -4879,11 +4879,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Masakhane\\Documents\\AngularC#\\Project\\API\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\Masakhane\\Documents\\AngularC#\\Project\\API\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "c:\\Users\\Masakhane\\Documents\\AngularC#\\Project\\API\\API\\API.csproj",
+      "projectPath": "C:\\Users\\Masakhane\\Documents\\AngularC#\\Project\\API\\API\\API.csproj",
       "packagesPath": "C:\\Users\\Masakhane\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Masakhane\\Documents\\AngularC#\\Project\\API\\API\\obj\\",
+      "outputPath": "C:\\Users\\Masakhane\\Documents\\AngularC#\\Project\\API\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Masakhane\\AppData\\Roaming\\NuGet\\NuGet.Config"

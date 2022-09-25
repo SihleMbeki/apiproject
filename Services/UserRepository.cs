@@ -81,6 +81,9 @@ namespace API.Services
             throw new NotImplementedException();
         }
 
-
+        Task<School> IUserRepository.GetSymptomByIDAsync(int Id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

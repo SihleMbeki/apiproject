@@ -28,12 +28,30 @@ namespace API
         {
             _confi = confi;
         }
+        readonly string allowSpecificOrigins = "_allowSpecificOrigins";
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+           //  services.AddCors();
+
+           services.AddCors(options =>
+            {
+                options.AddPolicy(allowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                });
+            });
+services.AddCors(c =>  
+            {  
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("http://localhost"));  
+            });
             services.AddScoped<IUserRepository,UserRepository>();
             services.AddScoped<ITokenService,TokenService>();
 ;            services.AddDbContext<DataContext>(options=>{
@@ -61,6 +79,15 @@ namespace API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            /*app.UseCors(builder => builder
+        .WithOrigins("http://localhost/view", "http://localhost:5001")
+        .AllowAnyMethod()
+        .AllowCredentials()
+        .WithHeaders("Accept", "Content-Type", "Origin", "X-My-Header"));*/
+        app.UseCors(allowSpecificOrigins);
+        app.UseCors(options=>options.WithOrigins("http://localhostdd"));  
+        //app.UseCors(options => options.AllowAnyOrigin());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -71,7 +98,7 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:5001"));
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost"));
             app.UseAuthentication();
             app.UseAuthorization();
 

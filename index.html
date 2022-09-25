@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Bootstrap</title>
+</head>
+
+<body data-spy="scroll" data-target="#navbar-site" data-offset="80">
+
+  <style>
+    body {
+      position: relative;
+      padding-top: 80px;
+    }
+  </style>
+
+<nav id="navbar-site" class="fixed-top navbar navbar-dark bg-primary navbar-expand-sm">
+  <div class="container">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" href="#mission">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="#services">About</a></li>
+      <li class="nav-item"><a class="nav-link" href="#staff">Contact</a></li>
+    </ul><!-- navbar-nav -->
+  </div><!-- container -->
+</nav>
+
+<div class="container">
+
+  <div class="content" id="mission">
+    <form id="loginForm">
+      <p id="error"></p>
+      <div class="form-group">
+          <label for="inputEmail">Email</label>
+          <input type="text" class="form-control" id="inputUsername" placeholder="Username" required="true">
+      </div>
+      <div class="form-group">
+          <label for="inputPassword">Password</label>
+          <input type="password" class="form-control" id="inputPassword" placeholder="Password" required="true">
+      </div>
+      <div class="form-group">
+        <label class="form-check-label"><a href="#">Create account</a></label>
+    </div>
+      <button type="submit" class="btn btn-primary" id="signin">Sign in</button>
+  </form>
+  
+  </div>
+
+  
+
+
+
+
+
+</div><!-- content container -->
+
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+
+<script>
+$(function() {
+  var topoffset = 70; //variable for menu height
+
+  //Use smooth scrolling when clicking on navigation
+  $('.navbar-nav a').click(function() {
+    if (location.pathname.replace(/^\//,'') ===
+      this.pathname.replace(/^\//,'') &&
+      location.hostname === this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top-topoffset
+        }, 500);
+        return false;
+      } //target.length
+    } //click function
+  }); //smooth scrolling
+});
+
+</script>
+</body>
+</html>

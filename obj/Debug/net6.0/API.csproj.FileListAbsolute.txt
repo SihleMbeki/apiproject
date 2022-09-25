@@ -60,3 +60,4 @@ C:\Users\Masakhane\Documents\AngularC#\Project\API\API\bin\Debug\net6.0\Microsof
 C:\Users\Masakhane\Documents\AngularC#\Project\API\API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Masakhane\Documents\AngularC#\Project\API\API\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\Masakhane\Documents\AngularC#\Project\API\API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Masakhane\Documents\AngularC#\Project\API\API\bin\Debug\net6.0\web.config
