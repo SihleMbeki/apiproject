@@ -12,8 +12,6 @@ namespace API.Services
 {
     public class UserRepository : IUserRepository
     {
-
-        
             private readonly DataContext _context;
              public UserRepository(DataContext context)
         {
@@ -47,9 +45,9 @@ namespace API.Services
             .Where(x => x.Gender == childItem.gender).ToListAsync();
         }
 
-        public Task<AppUser> GetUserByIdAsync(int id)
+        public async Task<AppUser> GetUserByIdAsync(int id)
         {
-            throw new NotImplementedException();
+          return await _context.users.FindAsync(id);
         }
 
         public async Task<AppUser> GetUserByUsernameAsync(string username)
@@ -81,9 +79,19 @@ namespace API.Services
             throw new NotImplementedException();
         }
 
-        Task<School> IUserRepository.GetSymptomByIDAsync(int Id)
+        public async Task<IEnumerable<School>> GetAllSchoolsAsync(string province, string city)
         {
-            throw new NotImplementedException();
+           return  await _context.schools.Where(x => x.Id >= 1).ToListAsync<School>();
+        }
+
+        public async Task<IEnumerable<Symptoms>> GetAllSymptoms()
+        {
+           return await _context.symptoms.Where(x => x.Id >= 1).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Child>> GetAllChildrens()
+        {
+          return  await _context.child.Where(x => x.Id >= 1).ToListAsync<Child>();
         }
     }
 }

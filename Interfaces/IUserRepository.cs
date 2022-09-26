@@ -13,9 +13,11 @@ namespace API.Interfaces
         Task<AppUser> GetUserByIdAsync(int id);
         Task<AppUser> GetUserByUsernameAsync(string username);
         Task<IEnumerable<School>> GetSchoolsAsync(String province,String city);
+        Task<IEnumerable<School>> GetAllSchoolsAsync(String province,String city);
         Task<IEnumerable<Symptoms>> GetSymptoms(int  childId);
-        Task<ChildDto> GetChildrens(string username);
+        Task<IEnumerable<Symptoms>> GetAllSymptoms();
+        Task<IEnumerable<Child>> GetAllChildrens();
         Task<School> GetSchoolByIDAsync(int Id);
-        Task<School> GetSymptomByIDAsync(int Id);
+        Task<Symptoms> GetSymptomByIDAsync(int Id);
     }
 }
