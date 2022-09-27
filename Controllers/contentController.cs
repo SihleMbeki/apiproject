@@ -118,6 +118,42 @@ namespace API.Controllers
             var message = await _userRepository.GetSymptomByIDAsync(id);
         return Ok();
         }
+    
+        [Authorize]
+        [HttpGet("schools/")]
+        public async Task<IEnumerable<School>> GetAllSchoolsAsync(string province, string city)
+        {
+            return await _userRepository.GetAllSchoolsAsync();
+        }
+
+        [Authorize]
+        [HttpGet("school/{province}")]
+        public async Task<IEnumerable<School>> GetSchoolsByProvinceAsync(string province, string city)
+        {
+            return await _userRepository.GetSchoolsAsync(province,null);
+        }
+
+        [Authorize]
+        [HttpGet("school/city/{city}")]
+        public async Task<IEnumerable<School>> GetSchoolsByCityAsync(string city)
+        {
+            return await _userRepository.GetSchoolsAsync(null,city);
+        }
+
+
+        
+        [Authorize]
+        [HttpGet("symptoms")]
+        public async Task<IEnumerable<Symptoms>> GetAllSymptoms()
+        {
+          return await _userRepository.GetAllSymptoms();
+        }
+        [Authorize]
+        [HttpGet("childrens")]
+        public async Task<IEnumerable<Child>> GetAllChildrens()
+        {
+            return await _userRepository.GetAllChildrens();
+        }
         private async Task<bool> UserExists(string username)
         {
             return await _context.users.AnyAsync(x => x.userName == username.ToLower());

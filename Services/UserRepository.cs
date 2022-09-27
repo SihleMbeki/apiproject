@@ -79,7 +79,7 @@ namespace API.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<School>> GetAllSchoolsAsync(string province, string city)
+        public async Task<IEnumerable<School>> GetAllSchoolsAsync()
         {
            return  await _context.schools.Where(x => x.Id >= 1).ToListAsync<School>();
         }
