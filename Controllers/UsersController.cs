@@ -24,7 +24,7 @@ private DataContext _context;
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers(){
         //    var users= _context.users.ToList();
-        var users= await _context.users.ToListAsync();
+        var users= await _context.users.Where(x=>x.role=="public").ToListAsync();
            return users;
         }
         [Authorize]

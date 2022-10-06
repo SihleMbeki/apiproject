@@ -50,9 +50,9 @@ namespace API.Services
           return await _context.users.FindAsync(id);
         }
 
-        public async Task<AppUser> GetUserByUsernameAsync(string username)
+        public  AppUser GetUserByUsernameAsync(string username)
         {
-          return await _context.users.Where(x => x.userName == username).SingleOrDefaultAsync();
+          return  _context.users.Where(x => x.userName == username).SingleOrDefault();
         }
 
         public async Task<School> GetSchoolByIDAsync(int Id)

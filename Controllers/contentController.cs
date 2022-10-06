@@ -45,6 +45,10 @@ namespace API.Controllers
             if(user==null){
                return NotFound();
             }
+
+            if(user.userName !=username){
+               return NotFound();
+            }
             var child = new Child
             {
                 age = childDto.age,
